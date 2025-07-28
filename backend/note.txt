@@ -1,1 +1,1 @@
-test push connect git
+test push connect git cpanel

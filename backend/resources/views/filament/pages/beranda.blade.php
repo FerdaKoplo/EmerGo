@@ -17,14 +17,27 @@
             }).addTo(map);
 
             
-            var ambulanceIcon = L.icon({
-                iconUrl: 'https://cdn-icons-png.flaticon.com/512/2967/2967350.png',
-                iconSize: [32, 32],
-                iconAnchor: [16, 32],
-            });
-            L.marker([-7.2575, 112.7521], {icon: ambulanceIcon}).addTo(map);
+            var damkarIcon = L.icon({
+            iconUrl: '/images/damkar.png', 
+            iconSize: [40, 40],
+            iconAnchor: [20, 40],
+            }); 
+            L.marker([-7.2575, 112.7521], {icon: damkarIcon}).addTo(map);
 
-           
+            var ambulanIcon = L.icon({
+            iconUrl: '/images/ambulan.png',
+            iconSize: [30, 30],
+            iconAnchor: [20, 40],
+            });
+            L.marker([-7.2600, 112.7600], {icon: ambulanIcon}).addTo(map);
+
+            var polisiIcon = L.icon({
+            iconUrl: '/images/polisi.png',
+            iconSize: [35, 35],
+            iconAnchor: [17, 35],
+            });
+            L.marker([-7.2550, 112.7500], {icon: polisiIcon}).addTo(map);
+                
         });
     </script>
 </x-filament::page>

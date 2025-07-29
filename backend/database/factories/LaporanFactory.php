@@ -32,7 +32,6 @@ class LaporanFactory extends Factory
             'status' => fake()->randomElement(StatusLaporan::cases()),
             'kategori' => fake()->randomElement(KategoriLaporan::cases()),
             'deskripsi' => fake()->paragraphs(3, true),
-            // Menggunakan URL gambar palsu untuk kolom foto
             'foto' => fake()->imageUrl(640, 480, 'disaster', true),
         ];
     }

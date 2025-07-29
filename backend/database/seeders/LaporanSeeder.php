@@ -12,8 +12,6 @@ class LaporanSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([
-            LaporanSeeder::class,
-        ]);
+        \App\Models\Laporan::factory(50)->create();
     }
 }

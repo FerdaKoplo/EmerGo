@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('statistiks', function (Blueprint $table) {
             $table->id();
+            $table->date('tanggal')->unique();
+            $table->unsignedInteger('total_laporan')->default(0);
+            $table->unsignedInteger('jumlah_damkar')->default(0);
+            $table->unsignedInteger('jumlah_ambulance')->default(0);
+            $table->unsignedInteger('jumlah_sar')->default(0);
+            $table->unsignedInteger('jumlah_polisi')->default(0);
             $table->timestamps();
         });
     }

@@ -33,7 +33,6 @@ class Laporan extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        // Memberitahu Laravel agar mengubah kolom ini menjadi Enum secara otomatis
         'status' => StatusLaporan::class,
         'kategori' => KategoriLaporan::class,
         'tanggal_waktu' => 'datetime',

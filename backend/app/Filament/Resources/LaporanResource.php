@@ -46,8 +46,12 @@ class LaporanResource extends Resource
                     ->default('damkar'),
                 Forms\Components\Textarea::make('deskripsi')
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('foto')
-                    ->maxLength(255),
+                Forms\Components\FileUpload::make('foto')
+                    ->label('Foto Insiden')
+                    ->image() 
+                    ->directory('laporan-insiden') 
+                    ->imageEditor() 
+                    ->columnSpanFull(),
             ]);
     }
 

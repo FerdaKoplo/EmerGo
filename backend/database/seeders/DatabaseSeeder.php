@@ -22,5 +22,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LaporanSeeder::class,
         ]);
+
+        $this->call([
+            ResponseTeamSeeder::class
+        ]);
     }
 }

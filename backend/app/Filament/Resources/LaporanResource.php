@@ -40,7 +40,7 @@ protected static ?string $navigationIcon = 'heroicon-o-document-text';
                 Forms\Components\Textarea::make('deskripsi')->columnSpanFull(),
                 Forms\Components\FileUpload::make('foto')
                     ->label('Foto Insiden')
-                    ->disk('public') // <-- FIX untuk gambar loading di form Edit
+                    ->disk('public')
                     ->image()
                     ->directory('laporan-insiden')
                     ->imageEditor()
@@ -65,7 +65,7 @@ protected static ?string $navigationIcon = 'heroicon-o-document-text';
                         Infolists\Components\Section::make('Informasi Tambahan')
                             ->schema([
                                 Infolists\Components\ImageEntry::make('foto')
-                                    ->disk('public') // <-- FIX untuk gambar tidak muncul di View
+                                    ->disk('public') 
                                     ->hiddenLabel()
                                     ->height(150),
                                 Infolists\Components\TextEntry::make('status')->badge(),

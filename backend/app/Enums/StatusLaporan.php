@@ -13,6 +13,7 @@ enum StatusLaporan: string implements HasColor, HasLabel
     case Helping = 'helping';
     case Finishing = 'finishing';
     case Done = 'done';
+    case OnTheWay = 'on_the_way';
 
     public function getLabel(): ?string
     {
@@ -23,6 +24,7 @@ enum StatusLaporan: string implements HasColor, HasLabel
             self::Helping => 'Helping',
             self::Finishing => 'Finishing',
             self::Done => 'Done',
+            self::OnTheWay => 'On The Way',
         };
     }
 
@@ -34,7 +36,8 @@ enum StatusLaporan: string implements HasColor, HasLabel
             self::Arrived => 'info',
             self::Helping => 'primary',
             self::Finishing => 'success',
-            self::Done => 'success', 
+            self::Done => 'success',
+            self::OnTheWay => 'warning',
         };
     }
 }

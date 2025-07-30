@@ -19,6 +19,7 @@ class Statistik extends Page
         return [
             StatsOverview::class,
             KorbanPerBulanChart::class, 
+            LaporanPerBulanChart::class
         ];
     }
 }

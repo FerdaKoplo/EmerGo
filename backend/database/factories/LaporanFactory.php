@@ -5,17 +5,10 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Enums\StatusLaporan;
 use App\Enums\KategoriLaporan;
+use Illuminate\Support\Facades\Storage;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Laporan>
- */
 class LaporanFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         $namaInsiden = [
@@ -23,6 +16,9 @@ class LaporanFactory extends Factory
             'Orang Terjatuh di Gunung', 'Pembobolan ATM', 'Tabrakan Motor vs Mobil',
             'Banjir Lokal', 'Penemuan Ular di Pemukiman'
         ];
+
+        // Ambil semua file .png dari folder images Anda
+        $sumberGambar = glob(database_path('seeders/images/*.png'));
 
         return [
             'nomor' => strtoupper(fake()->randomElement(['DMK', 'KCL', 'SAR', 'KJH'])) . '-' . now()->format('dmy') . '-' . fake()->unique()->numerify('###'),
@@ -32,7 +28,16 @@ class LaporanFactory extends Factory
             'status' => fake()->randomElement(StatusLaporan::cases()),
             'kategori' => fake()->randomElement(KategoriLaporan::cases()),
             'deskripsi' => fake()->paragraphs(3, true),
-            'foto' => fake()->imageUrl(640, 480, 'disaster', true),
+            'foto' => function () use ($sumberGambar) {
+                if (empty($sumberGambar)) {
+                    return null;
+                }
+                $gambarAcakPath = $sumberGambar[array_rand($sumberGambar)];
+                $namaFileAsli = basename($gambarAcakPath);
+                $pathTujuan = 'laporan-insiden/' . $namaFileAsli;
+                Storage::disk('public')->put($pathTujuan, file_get_contents($gambarAcakPath));
+                return $pathTujuan;
+            },
         ];
     }
 }

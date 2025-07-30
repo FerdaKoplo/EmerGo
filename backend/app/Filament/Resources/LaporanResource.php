@@ -48,9 +48,10 @@ class LaporanResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\FileUpload::make('foto')
                     ->label('Foto Insiden')
-                    ->image() 
-                    ->directory('laporan-insiden') 
-                    ->imageEditor() 
+                    ->disk('public')
+                    ->image()
+                    ->directory('laporan-insiden')
+                    ->imageEditor()
                     ->columnSpanFull(),
             ]);
     }
@@ -66,14 +67,19 @@ class LaporanResource extends Resource
                 Tables\Columns\TextColumn::make('tanggal_waktu')
                     ->dateTime()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('lokasi')
-                    ->searchable(),
+
+                // Diubah kembali ke TextColumn dengan ->badge()
                 Tables\Columns\TextColumn::make('status')
+                    ->badge()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('kategori')
+                    ->badge()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('foto')
-                    ->searchable(),
+
+                // Tables\Columns\ImageColumn::make('foto')
+                //     ->disk('public')
+                //     ->square(),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -87,6 +93,7 @@ class LaporanResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([

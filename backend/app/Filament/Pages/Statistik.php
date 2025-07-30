@@ -4,6 +4,8 @@ namespace App\Filament\Pages;
 
 use Filament\Pages\Page;
 use App\Filament\Widgets\StatsOverview; 
+use App\Filament\Widgets\LaporanPerBulanChart;
+use App\Filament\Widgets\KorbanPerBulanChart; 
 
 class Statistik extends Page
 {
@@ -16,6 +18,7 @@ class Statistik extends Page
     {
         return [
             StatsOverview::class,
+            KorbanPerBulanChart::class, 
         ];
     }
 }

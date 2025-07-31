@@ -33,14 +33,18 @@ jobs:
           echo "CACHE_STORE=file" >> .env
           echo "QUEUE_CONNECTION=sync" >> .env
         working-directory: ./backend
+      
+      # --- URUTAN DIPERBAIKI DI SINI ---
+      # 1. Install dependensi DULU
+      - name: Install Composer Dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
+        working-directory: ./backend
 
+      # 2. BARU jalankan artisan untuk generate key
       - name: Generate App Key
         run: php artisan key:generate --force
         working-directory: ./backend
 
-      - name: Install Composer Dependencies
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
-        working-directory: ./backend
       - name: SFTP Deploy
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:

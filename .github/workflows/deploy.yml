@@ -3,7 +3,7 @@ name: Deploy Laravel to cPanel FTP
 on:
   push:
     branches:
-      - "main" # Ganti 'main' jika nama branch utama Anda 'master'
+      - "main"
 
 jobs:
   deploy:
@@ -15,16 +15,13 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.2'
 
-      # PERUBAHAN DIMULAI DI SINI
       - name: Create .env file
-        # Menjalankan perintah ini dari dalam folder 'backend'
         run: php -r "file_exists('.env.production') && copy('.env.production', '.env');"
         working-directory: ./backend
 
       - name: Install Composer Dependencies
-        # Menjalankan composer dari dalam folder 'backend'
         run: composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
         working-directory: ./backend
 
@@ -34,6 +31,5 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # Hanya meng-upload isi dari folder 'backend'
           local-dir: ./backend/
           server-dir: ./

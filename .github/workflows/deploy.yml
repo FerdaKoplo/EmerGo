@@ -24,7 +24,6 @@ jobs:
           echo "APP_KEY=" >> .env
           echo "APP_DEBUG=false" >> .env
           echo "APP_URL=https://faridfarhan.my.id" >> .env
-          # ... (baris .env lainnya seperti sebelumnya)
           echo "DB_CONNECTION=mysql" >> .env
           echo "DB_HOST=127.0.0.1" >> .env
           echo "DB_PORT=3306" >> .env
@@ -43,11 +42,11 @@ jobs:
         run: composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
         working-directory: ./backend
       - name: SFTP Deploy
-        uses: laryve/sftp-deploy-action@v0.2.1
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          host: ${{ secrets.SFTP_HOST }}
           username: ${{ secrets.SFTP_USERNAME }}
+          server: ${{ secrets.SFTP_HOST }}
           password: ${{ secrets.SFTP_PASSWORD }}
-          port: 22 
-          path: /home/faridfar/public_html/backend/ # 
-          local_path: ./backend/ 
+          port: 22
+          local_path: ./backend/
+          remote_path: /home/faridfar/public_html/backend

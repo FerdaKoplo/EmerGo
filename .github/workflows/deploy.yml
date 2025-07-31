@@ -1,4 +1,4 @@
-name: Deploy Laravel to cPanel FTP
+name: Deploy Laravel to cPanel SFTP
 
 on:
   push:
@@ -17,19 +17,37 @@ jobs:
         with:
           php-version: '8.2'
 
-      - name: Create .env file
-        run: php -r "file_exists('.env.production') && copy('.env.production', '.env');"
+      - name: Create .env file from secrets
+        run: |
+          echo "APP_NAME=EmerGo" >> .env
+          echo "APP_ENV=production" >> .env
+          echo "APP_KEY=" >> .env
+          echo "APP_DEBUG=false" >> .env
+          echo "APP_URL=https://faridfarhan.my.id" >> .env
+          # ... (baris .env lainnya seperti sebelumnya)
+          echo "DB_CONNECTION=mysql" >> .env
+          echo "DB_HOST=127.0.0.1" >> .env
+          echo "DB_PORT=3306" >> .env
+          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+          echo "CACHE_STORE=file" >> .env
+          echo "QUEUE_CONNECTION=sync" >> .env
+        working-directory: ./backend
+
+      - name: Generate App Key
+        run: php artisan key:generate --force
         working-directory: ./backend
 
       - name: Install Composer Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
         working-directory: ./backend
-
-      - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: SFTP Deploy
+        uses: laryve/sftp-deploy-action@v0.2.1
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./backend/
-          server-dir: ./
+          host: ${{ secrets.SFTP_HOST }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          port: 22 
+          path: /home/faridfar/public_html/backend/ # 
+          local_path: ./backend/ 

@@ -9,30 +9,31 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # Langkah 1: Checkout kode dari repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Langkah 2: Setup PHP versi 8.1
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.1'
 
-      # Langkah 3: Salin file .env.production menjadi .env
+      # PERUBAHAN DIMULAI DI SINI
       - name: Create .env file
+        # Menjalankan perintah ini dari dalam folder 'backend'
         run: php -r "file_exists('.env.production') && copy('.env.production', '.env');"
+        working-directory: ./backend
 
-      # Langkah 4: Install dependensi Composer
       - name: Install Composer Dependencies
+        # Menjalankan composer dari dalam folder 'backend'
         run: composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
+        working-directory: ./backend
 
-      # Langkah 5: Deploy file menggunakan FTP
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./
+          # Hanya meng-upload isi dari folder 'backend'
+          local-dir: ./backend/
           server-dir: ./

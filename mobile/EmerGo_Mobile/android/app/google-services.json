@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "928177719633",
+    "project_id": "emergo-59b6b",
+    "storage_bucket": "emergo-59b6b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:928177719633:android:6fd42cb583fcc907502b70",
+        "android_client_info": {
+          "package_name": "com.example.emergo_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAA1IwCjIju_JwyeCVMIp1TO9Nwkp3pD8U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

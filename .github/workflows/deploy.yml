@@ -53,4 +53,4 @@ jobs:
           password: ${{ secrets.SFTP_PASSWORD }}
           port: 22
           local_path: ./backend/
-          remote_path: /home/faridfar/public_html/backend
+          remote_path: /home/faridfar/public_html/

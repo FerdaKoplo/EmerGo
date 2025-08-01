@@ -15,7 +15,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3' 
+          php-version: '8.3'
 
       - name: Create .env file from secrets
         run: |
@@ -45,7 +45,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' 
+          node-version: '20'
 
       - name: Install NPM Dependencies
         run: npm install
@@ -54,7 +54,6 @@ jobs:
       - name: Build Frontend Assets
         run: npm run build
         working-directory: ./backend
-
 
       - name: SFTP Deploy
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
@@ -65,3 +64,6 @@ jobs:
           port: 22
           local_path: ./backend/
           remote_path: /home/faridfar/public_html/backend
+
+          exclude: |
+            **/node_modules/**

@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @vite('resources/css/app.css')
-    <title>EmerGo</title>
+    <title>Test</title>
 </head>
 
 <body class="font-sans antialiased bg-white text-gray-800">

@@ -58,3 +58,15 @@ jobs:
           port: 22
           local_path: ./backend/
           remote_path: /home/faridfar/public_html/backend
+
+      # --- Clear Caches on Server via SSH---
+      - name: Clear Caches on Server via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SFTP_HOST }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          port: 22
+          script: |
+            cd /home/faridfar/public_html/backend
+            /opt/cpanel/ea-php83/root/usr/bin/php artisan optimize:clear
